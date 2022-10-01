@@ -454,7 +454,10 @@ $(document).ready(function () {
 });
 
 
-
+let renderableLayer = new WorldWind.RenderableLayer();
+globe.addLayer(renderableLayer, {
+    displayName: "Iss (Zarya)"
+});
 
 function moveISS () {
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
@@ -467,15 +470,15 @@ function moveISS () {
         // isscirc.setLatLng([lat, lon]);
         // map.panTo([lat, lon], animate=true);
 
-        // Create Collada 3D iss model
-        let renderableLayer = new WorldWind.RenderableLayer();
-        globe.addLayer(renderableLayer, {
-            displayName: "Iss (Zarya)"
-        });
+    // Create Collada 3D iss model
+    
+    renderableLayer.removeAllRenderables();
+
     let position = new WorldWind.Position(lat, lon, 750000);
     let colladaLoader = new WorldWind.ColladaLoader(position);
     
     colladaLoader.init({dirPath: 'resources//Models/ISS/'});
+
         colladaLoader.load('ISS.dae', function (model) {
             model.scale = 10000;
             renderableLayer.addRenderable(model);
