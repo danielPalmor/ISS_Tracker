@@ -169,6 +169,7 @@ class Globe {
     }
 }
 
+let firstUpload = true;
 // Create a globe
 let globe = new Globe("globe-canvas");
 // Add layers to the globe 
@@ -460,6 +461,7 @@ globe.addLayer(renderableLayer, {
 });
 
 function moveISS () {
+    let Initialized = false;
     $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
         var lat = data['iss_position']['latitude'];
         var lon = data['iss_position']['longitude'];
@@ -482,7 +484,11 @@ function moveISS () {
         colladaLoader.load('ISS.dae', function (model) {
             model.scale = 10000;
             renderableLayer.addRenderable(model);
-            globe.wwd.goTo(new WorldWind.Position(lat, lon, 12000000));
+            if(firstUpload)
+            {
+                globe.wwd.goTo(new WorldWind.Position(lat, lon, 12000000));
+                firstUpload = false;
+            }
         });
     });
     setTimeout(moveISS, 5000); 
