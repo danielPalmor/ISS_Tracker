@@ -31,22 +31,22 @@ class Globe {
      * @returns {Array} 
      */
     get projectionNames() {
-        return [
-            "3D",
-            "Equirectangular",
-            "Mercator",
-            "North Polar",
-            "South Polar",
-            "North UPS",
-            "South UPS",
-            "North Gnomonic",
-            "South Gnomonic"
-        ];
-    }
-    /**
-     * Changes the globe's projection.
-     * @param {String} projectionName
-     */
+            return [
+                "3D",
+                "Equirectangular",
+                "Mercator",
+                "North Polar",
+                "South Polar",
+                "North UPS",
+                "South UPS",
+                "North Gnomonic",
+                "South Gnomonic"
+            ];
+        }
+        /**
+         * Changes the globe's projection.
+         * @param {String} projectionName
+         */
     changeProjection(projectionName) {
         if (projectionName === "3D") {
             if (!this.roundGlobe) {
@@ -113,7 +113,7 @@ class Globe {
 
         // Multiplicity Rule: only [0..1] "base" layers can be enabled at a time
         if (layer.category === 'base') {
-            this.wwd.layers.forEach(function (item) {
+            this.wwd.layers.forEach(function(item) {
                 if (item.category === 'base' && item !== layer) {
                     item.enabled = false;
                 }
@@ -215,7 +215,7 @@ globe.addLayer(new WorldWind.AtmosphereLayer(), {
     time: null // or new Date()
 });
 
-$(document).ready(function () {
+$(document).ready(function() {
     "use strict";
 
     // Set the Bing API key for Bing Maps
@@ -239,7 +239,7 @@ $(document).ready(function () {
      * @param {String} canvasId The ID of the canvas element that will host the globe
      * @returns {Globe}
      */
-    
+
 
     /**
      * View model for the layers panel.
@@ -258,13 +258,13 @@ $(document).ready(function () {
             self.loadLayers(globe.getLayers('overlay'), self.overlayLayers));
 
         // Utility to load the layers in reverse order to show last rendered on top
-        self.loadLayers = function (layers, observableArray) {
+        self.loadLayers = function(layers, observableArray) {
             observableArray.removeAll();
             layers.reverse().forEach(layer => observableArray.push(layer));
         };
 
         // Click event handler for the layer panel's buttons
-        self.toggleLayer = function (layer) {
+        self.toggleLayer = function(layer) {
             globe.toggleLayer(layer);
         };
     }
@@ -282,13 +282,13 @@ $(document).ready(function () {
             self.loadLayers(globe.getLayers('setting'), self.settingLayers));
 
         // Utility to load layers in reverse order 
-        self.loadLayers = function (layers, observableArray) {
+        self.loadLayers = function(layers, observableArray) {
             observableArray.removeAll();
             layers.reverse().forEach(layer => observableArray.push(layer));
         };
 
         // Click event handler for the setting panel's buttons
-        self.toggleLayer = function (layer) {
+        self.toggleLayer = function(layer) {
             globe.toggleLayer(layer);
         };
     }
@@ -304,7 +304,7 @@ $(document).ready(function () {
         let self = this;
         self.geocoder = new WorldWind.NominatimGeocoder();
         self.searchText = ko.observable('');
-        self.performSearch = function () {
+        self.performSearch = function() {
             if (!MAPQUEST_API_KEY) {
                 console.error("SearchViewModel: A MapQuest API key is required to use the geocoder in production. Get your API key at https://developer.mapquest.com/");
             }
@@ -320,7 +320,7 @@ $(document).ready(function () {
                     globe.wwd.goTo(new WorldWind.Location(latitude, longitude));
                 } else {
                     // Treat the text as an address or place name
-                    self.geocoder.lookup(queryString, function (geocoder, results) {
+                    self.geocoder.lookup(queryString, function(geocoder, results) {
                         if (results.length > 0) {
                             // Open the modal dialog to preview and select a result
                             preview(results);
@@ -362,7 +362,7 @@ $(document).ready(function () {
         this.selected = ko.observable();
 
         // Shows the given search results in a table with a preview globe/map
-        this.previewResults = function (results) {
+        this.previewResults = function(results) {
             if (results.length === 0) {
                 return;
             }
@@ -392,7 +392,7 @@ $(document).ready(function () {
         };
 
         // Center's the preview globe on the selection and sets the selected item.
-        this.previewSelection = function (selection) {
+        this.previewSelection = function(selection) {
             let latitude = parseFloat(selection.lat),
                 longitude = parseFloat(selection.lon),
                 location = new WorldWind.Location(latitude, longitude);
@@ -403,13 +403,13 @@ $(document).ready(function () {
         };
 
         // Centers the primary globe on the selected item
-        this.gotoSelected = function () {
+        this.gotoSelected = function() {
             // Go to the location held in the selected observable
             primaryGlobe.wwd.goTo(self.selected());
         };
     }
 
-    
+
 
     // let renderableLayer = new WorldWind.RenderableLayer();
     // globe.addLayer(renderableLayer, {
@@ -426,7 +426,7 @@ $(document).ready(function () {
     //     renderableLayer.addRenderable(model);
     //     globe.wwd.goTo(new WorldWind.Position(100, 50, 750000));
     // });
-       
+
 
     // Create the view models
     let layers = new LayersViewModel(globe);
@@ -443,12 +443,12 @@ $(document).ready(function () {
 
 
     // Auto-collapse the main menu when its button items are clicked
-    $('.navbar-collapse a[role="button"]').click(function () {
+    $('.navbar-collapse a[role="button"]').click(function() {
         $('.navbar-collapse').collapse('hide');
     });
 
     // Collapse card ancestors when the close icon is clicked
-    $('.collapse .close').on('click', function () {
+    $('.collapse .close').on('click', function() {
         $(this).closest('.collapse').collapse('hide');
     });
 
@@ -460,11 +460,12 @@ globe.addLayer(renderableLayer, {
     displayName: "Iss (Zarya)"
 });
 
-function moveISS () {
+function moveISS() {
     let Initialized = false;
-    $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
-        var lat = data['iss_position']['latitude'];
-        var lon = data['iss_position']['longitude'];
+    $.getJSON('https://api.wheretheiss.at/v1/satellites/25544', function(data) {
+        var lat = data['latitude'];
+        var lon = data['longitude'];
+        var alt = data['altitude'] * 1000;
 
         // See leaflet docs for setting up icons and map layers
         // The update to the map is done here:
@@ -472,26 +473,25 @@ function moveISS () {
         // isscirc.setLatLng([lat, lon]);
         // map.panTo([lat, lon], animate=true);
 
-    // Create Collada 3D iss model
-    
-    renderableLayer.removeAllRenderables();
+        // Create Collada 3D iss model
 
-    let position = new WorldWind.Position(lat, lon, 750000);
-    let colladaLoader = new WorldWind.ColladaLoader(position);
-    
-    colladaLoader.init({dirPath: 'resources//Models/ISS/'});
+        renderableLayer.removeAllRenderables();
 
-        colladaLoader.load('ISS.dae', function (model) {
+        let position = new WorldWind.Position(lat, lon, alt);
+        let colladaLoader = new WorldWind.ColladaLoader(position);
+
+        colladaLoader.init({ dirPath: 'resources//Models/ISS/' });
+
+        colladaLoader.load('ISS.dae', function(model) {
             model.scale = 10000;
             renderableLayer.addRenderable(model);
-            if(firstUpload)
-            {
-                globe.wwd.goTo(new WorldWind.Position(lat, lon, 12000000));
+            if (firstUpload) {
+                globe.wwd.goTo(new WorldWind.Position(lat, lon, alt * 2));
                 firstUpload = false;
             }
         });
     });
-    setTimeout(moveISS, 5000); 
+    setTimeout(moveISS, 5000);
 }
 
 moveISS();
