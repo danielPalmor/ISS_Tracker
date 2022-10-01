@@ -483,10 +483,10 @@ function moveISS() {
         colladaLoader.init({ dirPath: 'resources//Models/ISS/' });
 
         colladaLoader.load('ISS.dae', function(model) {
-            model.scale = 10000;
+            model.scale = 2500;
             renderableLayer.addRenderable(model);
             if (firstUpload) {
-                globe.wwd.goTo(new WorldWind.Position(lat, lon, alt * 2));
+                globe.wwd.goTo(new WorldWind.Position(lat, lon, alt * 8));
                 firstUpload = false;
             }
         });
