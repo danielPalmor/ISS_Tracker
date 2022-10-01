@@ -455,14 +455,11 @@ $(document).ready(function () {
 
 
 
-let renderableLayer = new WorldWind.RenderableLayer();
-    globe.addLayer(renderableLayer, {
-        displayName: "Iss (Zarya)"
-    });
+
 function moveISS () {
-    $.getJSON('https://api.wheretheiss.at/v1/satellites/25544?callback=?', function(data) {
-        var lat = data['latitude'];
-        var lon = data['longitude'];
+    $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function(data) {
+        var lat = data['iss_position']['latitude'];
+        var lon = data['iss_position']['longitude'];
 
         // See leaflet docs for setting up icons and map layers
         // The update to the map is done here:
@@ -471,10 +468,14 @@ function moveISS () {
         // map.panTo([lat, lon], animate=true);
 
         // Create Collada 3D iss model
-        let position = new WorldWind.Position(lat, lon, 750000);
-        let colladaLoader = new WorldWind.ColladaLoader(position);
-
-        colladaLoader.init({dirPath: 'resources//Models/ISS/'});
+        let renderableLayer = new WorldWind.RenderableLayer();
+        globe.addLayer(renderableLayer, {
+            displayName: "Iss (Zarya)"
+        });
+    let position = new WorldWind.Position(lat, lon, 750000);
+    let colladaLoader = new WorldWind.ColladaLoader(position);
+    
+    colladaLoader.init({dirPath: 'resources//Models/ISS/'});
         colladaLoader.load('ISS.dae', function (model) {
             model.scale = 10000;
             renderableLayer.addRenderable(model);
