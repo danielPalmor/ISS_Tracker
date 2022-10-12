@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>WorldWind Starter Template</title>
+    <title>Iss Tracker - The Swots</title>
 
     <!-- Bootstrap 4.0 CSS compiled and minified -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -20,14 +20,31 @@
 </head>
 
 <body>
+    <div id="loading">
+        <h1>
+            Loading...</h1>
+    </div>
+    <!-- iss location button -->
+    <div id="iss-location">
+        <!-- Credit to: https://getcssscan.com/css-buttons-examples -->
+        <button id="iss-location-button" style="background-color: #c2fbd7;border: none; border-radius: 5px; 
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+                    rgba(44,187,99,.25) 0 1px 2px,
+                    rgba(44,187,99,.25) 0 2px 4px,
+                    rgba(44,187,99,.25) 0 4px 8px,
+                    rgba(44,187,99,.25) 0 8px 16px,
+                    rgba(44,187,99,.25) 0 16px 32px;">
+            iss location
+        </button>
+        <span id="locationLabel"> </span>
+    </div>
 
     <!--Main menu content-->
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-
         <!--Branding icon and text-->
-        <a class="navbar-brand" href="https://worldwind.arc.nasa.gov/web">
-            <img src="./resources/Images/The_Swots.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
-            The Swots 
+        <a class="navbar-brand" href="https://github.com/danielPalmor/ISS_Tracker.git">
+            <img src="./Resources/Images/The_Swots.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
+            The Swots
         </a>
 
         <!--Hamburger menu displayed on small screens/windows-->
@@ -43,14 +60,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#layers" role="button">
                         <span class="fas fa-list" aria-hidden="true"></span>
-                        <span class="d-md-none d-lg-inline" aria-hidden="true">Layers</span>
-                    </a>
-                </li>
-                <!--Markers-->
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#markers" role="button">
-                        <span class="fas fa-map-marker-alt" aria-hidden="true"></span>
-                        <span class="d-md-none d-lg-inline" aria-hidden="true">Markers</span>
+                        <span class="d-md-none d-lg-inline" aria-hidden="true">Features</span>
                     </a>
                 </li>
                 <!--Settings-->
@@ -73,6 +83,10 @@
     </nav>
     <!-- Use container-fluid for 100% width and set padding to 0 -->
     <main role="main" class="container-fluid p-0">
+        <div class="container">
+            <iframe id="map" src="" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
         <!-- Globe -->
         <div id="globe" class="globe">
             <!--.d-block ensures the size is correct (prevents a scrollbar from appearing)-->
@@ -90,7 +104,7 @@
                     <div class="card globe-card interactive">
                         <div class="card-header">
                             <h5 class="card-title">
-                                <span class="fas fa-list" aria-hidden="true"></span> Layers
+                                <span class="fas fa-list" aria-hidden="true"></span> Features
                                 <button type="button" class="close pull-right" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -101,22 +115,6 @@
                         <hr />
                         <div class="list-group"
                             data-bind="template: { name: 'layer-list-template', foreach: baseLayers}"></div>
-                    </div>
-                </div>
-                <!--Markers-->
-                <div class="collapse" id="markers">
-                    <div class="card globe-card interactive">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                <span class="fas fa-map-marker-alt" aria-hidden="true"></span> Markers
-                                <button type="button" class="close pull-right" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">Marker list goes here.</p>
-                        </div>
                     </div>
                 </div>
                 <!--Settings-->
@@ -211,6 +209,10 @@
         crossorigin="anonymous"></script>
     <script src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/satellite.js/4.0.0/satellite.min.js"></script>
+    <script src="globe.js"></script>
+    <script src="onFirstLoad.js"></script>
+    <script src="ScreenUpdatesFunctions.js"></script>
     <script src="app.js"></script>
 </body>
 

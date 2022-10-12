@@ -49,6 +49,71 @@ Sets the background color of Cards displayed over the globe .globe-card {
     overflow-y: auto;
 }
 
+#iss-location {
+    top: 80px;
+    left: 5px;
+    position: absolute;
+    border: 0;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 20px;
+    transition: all 250ms;
+    font-size: 16px;
+    touch-action: manipulation;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius:10px;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  }
+
+  /* The small map */
+  .container {
+    bottom: 0%;
+    left: 84.5%;
+    width: 200;
+    height: 200;
+    position: fixed;
+  }
+  
+#iss-location:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+#iss-location:active {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+  rgba(44,187,99,.25) 0 1px 2px,
+  rgba(44,187,99,.25) 0 2px 4px,
+  rgba(44,187,99,.25) 0 4px 8px,
+  rgba(44,187,99,.25) 0 8px 16px,
+  rgba(44,187,99,.25) 0 16px 32px;
+  transform: translateY(2px);
+}
+
+#loading {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.8;
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 1;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s, visibility 0.5s;
+    visibility: visible;
+  }
+  .disappear {
+    opacity: 0!important;
+    visibility: hidden!important;
+  }
+
 /* Prevents an element, like a <div/> from consuming user input */
 .noninteractive {
     -webkit-touch-callout: none;
