@@ -12,15 +12,15 @@ An open-source web application that tracks the international space station (iss)
 
 In the command line console, at your prefered directory run:  
 `git clone https://github.com/danielPalmor/ISS_Tracker.git`  
-Then run `index.html` localy on your server.
+Then run `index.html` localy on your server.  
+**Important**: Do not forget to enable CORS (Cross Origin Restrictions) in your web browser.
 
 If you don't know how to create a local server follow these instruction:
 
 To serve the application, in the command line console go to the directory of the downloaded program and run:  
 `npm install -g http-server`  
 Then run: `http-server`  
-After that the server will start.  
-**Important**: Do not forget to enable CORS (Cross Origin Restrictions) in your web browser.
+After that the server will start.
 
 # References
 
