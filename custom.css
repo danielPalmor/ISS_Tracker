@@ -71,10 +71,18 @@ Sets the background color of Cards displayed over the globe .globe-card {
   }
 
   /* The small map */
-  .container {
+  .map-of-iss-Location {
     bottom: 0%;
     left: 84.5%;
     width: 200;
+    height: 200;
+    position: fixed;
+  }
+
+  .spot-the-station {
+    bottom: 0%;
+    left: 66.7%;
+    width: 250;
     height: 200;
     position: fixed;
   }

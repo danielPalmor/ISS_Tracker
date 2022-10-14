@@ -83,9 +83,15 @@
     </nav>
     <!-- Use container-fluid for 100% width and set padding to 0 -->
     <main role="main" class="container-fluid p-0">
-        <div class="container">
+        <!-- Embeded map of the iss location -->
+        <div class="map-of-iss-Location">
             <iframe id="map" src="" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <!-- Embeded widget from Spot The Station -->
+        <div class="spot-the-station" style="border:0;" allowfullscreen="" loading="lazy">
+            <iframe id="spot-iss" src='https://spotthestation.nasa.gov/widget/widget2.cfm?theme=2' width='250'
+                height='200'></iframe>
         </div>
         <!-- Globe -->
         <div id="globe" class="globe">

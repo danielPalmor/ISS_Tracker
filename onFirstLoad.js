@@ -210,10 +210,12 @@ function onFirstLoad() {
     });
 
 
+
     loadCosmosSpaceDebris();
     loadFengyunSpaceDebris();
     loadRussianCosmosSpaceDebris();
     loadIridiumSpaceDebris();
+    combineLabelsAndModels();
     futureAndPastIssPositions(); // initizalize the iss's past and future orbits
     window.setTimeout(loadISS, 10000); // load iss only after everything has finished loading
 }

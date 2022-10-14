@@ -72,6 +72,16 @@ globe.addLayer(labelsLayer, {
     enabled: false
 });
 
+let mapLayer = new WorldWind.RenderableLayer("2D Map Of The Iss Location");
+globe.addLayer(mapLayer, {
+    category: 'setting',
+});
+
+let spotIssLayer = new WorldWind.RenderableLayer('Spot The Iss');
+globe.addLayer(spotIssLayer, {
+    category: 'setting',
+});
+
 let cosmosDebrisLayer = new WorldWind.RenderableLayer("Cosmos 2251 Space Debris");
 globe.addLayer(cosmosDebrisLayer, {
     enabled: false
@@ -138,34 +148,31 @@ window.setInterval(moveFengyunSpaceDebris, 10000);
 
 window.setInterval(moveRussianCosmosSpaceDebris, 10000);
 
-// coorelate 3D models and placemarks
-window.setInterval(() => {
-    if (issLayer.enabled && labelsLayer.enabled)
-        issPlacemarkLayer.enabled = true;
-    else
-        issPlacemarkLayer.enabled = false;
+document.addEventListener('click', () => {
 
-    if (cosmosDebrisLayer.enabled && labelsLayer.enabled)
-        cosmosPlacemarkLayer.enabled = true;
-    else
-        cosmosPlacemarkLayer.enabled = false;
+    // Handle embeded map enabled/disabled modes
+    if (mapLayer.enabled) {
+        document.getElementById("map").style.display = "block";
+        $('.spot-the-station').css('bottom', 0 + "%");
+        $('.spot-the-station').css('left', 66.7 + "%");
+    }
+    else {
+        document.getElementById("map").style.display = "none";
+        $('.spot-the-station').css('bottom', 0 + "%");
+        $('.spot-the-station').css('left', 80 + "%");
+    }
 
-    if (iridiumDebrisLayer.enabled && labelsLayer.enabled)
-        iridiumPlacemarkLayer.enabled = true;
+    // Handle embeded Spot The Station enabled/disabled modes
+    if (spotIssLayer.enabled)
+        document.getElementById("spot-iss").style.display = "block";
     else
-        iridiumPlacemarkLayer.enabled = false;
+        document.getElementById("spot-iss").style.display = "none";
 
-    if (fengyunDebrisLayer.enabled && labelsLayer.enabled)
-        fengyunPlacemarkLayer.enabled = true;
-    else
-        fengyunPlacemarkLayer.enabled = false;
+    combineLabelsAndModels();
 
-    if (russianCosmosDebrisLayer.enabled && labelsLayer.enabled)
-        russianCosmosPlacemarkLayer.enabled = true;
-    else
-        russianCosmosPlacemarkLayer.enabled = false;
-}, 1);
+})
 
+// The iss location button
 document.getElementById('iss-location').addEventListener('click', () => {
     $.getJSON('https://api.wheretheiss.at/v1/satellites/25544', function (data) {
         let lat = data['latitude'];

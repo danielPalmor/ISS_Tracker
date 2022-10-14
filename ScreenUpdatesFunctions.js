@@ -48,7 +48,7 @@ function loadCosmosSpaceDebris() {
         for (let i = 0; i < arrOfDebrisTLE.length; i++) {
             if (i === 55)// unclear why...
                 continue
-                
+
             let position = tleToLla(arrOfDebrisTLE[i], new Date());
             load3DSpaceDebris(position, dirPath, modelDirName, 'COSMOS 2251', cosmosDebrisLayer, cosmosPlacemarkLayer);
         }
@@ -283,4 +283,36 @@ function load3DSpaceDebris(position, dirPath, modelDirName, placemarkName, rende
     let modelPlaceMark = new WorldWind.Placemark(wwPosition);
     modelPlaceMark.label = placemarkName;
     placemarkLayer.addRenderable(modelPlaceMark);
+}
+
+// Coorelate 3D models and placemarks
+function combineLabelsAndModels() {
+    // iss
+    if (issLayer.enabled && labelsLayer.enabled)
+        issPlacemarkLayer.enabled = true;
+    else
+        issPlacemarkLayer.enabled = false;
+
+    // Cosmos 2251
+    if (cosmosDebrisLayer.enabled && labelsLayer.enabled)
+        cosmosPlacemarkLayer.enabled = true;
+    else
+        cosmosPlacemarkLayer.enabled = false;
+    // Iridium
+    if (iridiumDebrisLayer.enabled && labelsLayer.enabled)
+        iridiumPlacemarkLayer.enabled = true;
+    else
+        iridiumPlacemarkLayer.enabled = false;
+
+    //Fengyun
+    if (fengyunDebrisLayer.enabled && labelsLayer.enabled)
+        fengyunPlacemarkLayer.enabled = true;
+    else
+        fengyunPlacemarkLayer.enabled = false;
+
+    // Cosmos 1408
+    if (russianCosmosDebrisLayer.enabled && labelsLayer.enabled)
+        russianCosmosPlacemarkLayer.enabled = true;
+    else
+        russianCosmosPlacemarkLayer.enabled = false;
 }
