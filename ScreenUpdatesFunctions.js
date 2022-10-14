@@ -240,8 +240,8 @@ function moveRussianCosmosSpaceDebris() {
 /**
  * Translates TLE information to a position in longitude, latitude and altitude
  * 
- * @param {String[]} tleData the tle data to translate
- * @param {Date} date the date of the sattelite's position
+ * @param {String[]} tleData The tle data to translate
+ * @param {Date} date The date of the sattelite's position
  */
 function tleToLla(tleData, date) {
     // Initialize the satellite record with this TLE
