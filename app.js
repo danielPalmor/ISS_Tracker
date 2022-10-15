@@ -159,7 +159,7 @@ document.addEventListener('click', () => {
     else {
         document.getElementById("map").style.display = "none";
         $('.spot-the-station').css('bottom', 0 + "%");
-        $('.spot-the-station').css('left', 80 + "%");
+        $('.spot-the-station').css('left', 81 + "%");
     }
 
     // Handle embeded Spot The Station enabled/disabled modes

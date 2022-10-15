@@ -210,12 +210,18 @@ function onFirstLoad() {
     });
 
 
-
+    document.getElementById("spot-iss").style.display = "none";
     loadCosmosSpaceDebris();
     loadFengyunSpaceDebris();
     loadRussianCosmosSpaceDebris();
     loadIridiumSpaceDebris();
     combineLabelsAndModels();
     futureAndPastIssPositions(); // initizalize the iss's past and future orbits
-    window.setTimeout(loadISS, 10000); // load iss only after everything has finished loading
+    window.setTimeout(performAftertimeout, 10000); // load iss only after everything has finished loading
+}
+
+function performAftertimeout() {
+    loadISS();
+    document.getElementById("spot-iss").style.display = "block";
+    document.getElementById("map").style.display = "block";
 }
