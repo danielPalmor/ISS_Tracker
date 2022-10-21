@@ -9,6 +9,9 @@ An open-source web application that tracks the international space station (iss)
 * Observe different kinds of space debrises, see which of them is the closest to the iss and has the highest chance to collide with it.  
 * Change between different layers of the Earth and search every location on it.  
 
+Click the video below for a quick demonstration of the web application:  
+[![ISS Tracker Demo](/Resources/Images/ISS_Tracker_Video.png)](https://drive.google.com/file/d/1qYFu6mnRhCsatJCxCgRHfZP-FMytmniO/view?usp=sharing)
+
 # Setup
 
 In the command line console, at your prefered directory run:  
